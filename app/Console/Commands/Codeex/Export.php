@@ -82,7 +82,7 @@ class Export extends Command
                 $this->output->success('Запись сохранена!');
 
                 $this->info('Путь к файлу: ' . $path);
-                $this->info('Ссылка на файл: ' . Storage::url($fileName));
+                $this->info('Ссылка на файл: ' . asset(Storage::url($fileName)));
 
                 return;
             }
