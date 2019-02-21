@@ -2,16 +2,18 @@
 
 namespace App\Console\Commands\Codeex;
 
+use App\Exports\RecordExport;
 use App\Record;
 use Illuminate\Console\Command;
+use Maatwebsite\Excel\Facades\Excel;
+use Storage;
 use Validator;
 
-class Create extends Command
+class Export extends Command
 {
-    protected $signature = 'codeex:create';
+    protected $signature = 'codeex:export';
 
-    protected $description = 'Выполняет сохранение в хранилище с данными';
-
+    protected $description = 'Принимает входные данные в виде запроса и выполняет потоковое сохранение записей в CSV файл с последующей передачей его на клиентскую часть';
 
     public function handle()
     {
@@ -69,8 +71,23 @@ class Create extends Command
             return;
         }
 
-        $record = Record::create($data);
+        $record = new Record($data);
+        $rand = str_random();
+        $fileName = "record-$rand.csv";
 
-        $this->output->success('Запись сохранена! ID записи - ' . $record->getKey());
+        if (Excel::store(new RecordExport($record), $fileName)) {
+            if (Storage::exists($fileName)) {
+                $path = Storage::path($fileName);
+
+                $this->output->success('Запись сохранена!');
+
+                $this->info('Путь к файлу: ' . $path);
+                $this->info('Ссылка на файл: ' . Storage::url($fileName));
+
+                return;
+            }
+        }
+
+        $this->warn('Что-то пошло не так');
     }
 }

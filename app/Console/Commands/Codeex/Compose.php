@@ -47,6 +47,6 @@ class Compose extends Command
             'director' => $data['data']['management']['name'],
         ]);
 
-        $this->info('Запись сохранена! ID записи - ' . $record->getKey());
+        $this->output->success('Запись сохранена! ID записи - ' . $record->getKey());
     }
 }

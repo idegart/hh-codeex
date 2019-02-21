@@ -49,6 +49,6 @@ class Update extends Command
 
         $record->save();
 
-        $this->alert('Запись обновлена');
+        $this->output->success('Запись обновлена');
     }
 }

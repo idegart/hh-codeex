@@ -29,6 +29,7 @@ class Destroy extends Command
         }
 
         $record->forceDelete();
-        $this->alert('Запись удалена');
+
+        $this->output->success('Запись удалена!');
     }
 }
