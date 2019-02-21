@@ -4,6 +4,8 @@ namespace App\Console\Commands\Codeex;
 
 use App\Imports\RecordImport;
 use Illuminate\Console\Command;
+use Maatwebsite\Excel\Excel;
+use Maatwebsite\Excel\Validators\ValidationException;
 
 class Import extends Command
 {
@@ -27,9 +29,9 @@ class Import extends Command
 
             $this->output->title('Start import');
 
-            (new RecordImport)->withOutput($this->output)->import($filePath, null, \Maatwebsite\Excel\Excel::CSV);
+            (new RecordImport)->withOutput($this->output)->import($filePath, null, Excel::CSV);
 
-        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+        } catch (ValidationException $e) {
             $failures = $e->failures();
 
             foreach ($failures as $failure) {

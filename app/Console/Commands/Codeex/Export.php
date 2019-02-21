@@ -15,6 +15,7 @@ class Export extends Command
 
     protected $description = 'Принимает входные данные в виде запроса и выполняет потоковое сохранение записей в CSV файл с последующей передачей его на клиентскую часть';
 
+
     public function handle()
     {
         $name = $this->ask('Введите наименование');

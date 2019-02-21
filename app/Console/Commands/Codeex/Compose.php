@@ -19,7 +19,8 @@ class Compose extends Command
         $address = $this->ask('Введите адрес');
 
 
-        $client = new Client(); //GuzzleHttp\Client
+        $client = new Client();
+
         $result = $client->post(config('dadata.api_link'), [
             'headers'        => [
                 'Content-Type' => 'application/json',
