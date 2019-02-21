@@ -9,7 +9,7 @@ class Update extends Command
 {
     protected $signature = 'codeex:update {id?}';
 
-    protected $description = 'Выполняет фактическое удаление записи в хранилище с данными с помощью уникального идентификатора записи';
+    protected $description = 'Принимает входные данные и выполняет обновление существующей записи в хранилище с данными с помощью уникального идентификатора записи';
 
 
     public function handle()
